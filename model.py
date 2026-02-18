@@ -2,9 +2,15 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
-from ShuffleNet import shufflenet as _shufflenet
+try:
+    from ShuffleNet import shufflenet as _shufflenet
+except Exception:
+    # ShuffleNet is optional for this repo; guard the import so other modules can still run.
+    _shufflenet = None
 
 def shufflenet():
+    if _shufflenet is None:
+        raise ImportError("ShuffleNet not installed — install it or do not call shufflenet()")
     return _shufflenet()
 
 def weight_init(m):

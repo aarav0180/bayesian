@@ -1,4 +1,7 @@
 #!/bin/bash
+trap 'jobs -p | xargs -r kill; wait' EXIT INT TERM
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR"
 alpha_length=4
 csd_length=3
 epoch_length=5

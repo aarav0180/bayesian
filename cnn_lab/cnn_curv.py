@@ -1,7 +1,8 @@
-import sys
-sys.path.append("..")
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import wandb
-wandb.login(key="put your wandb key here")
+if os.environ.get('WANDB_API_KEY'):
+    wandb.login(key=os.environ['WANDB_API_KEY'])
 
 import argparse
 import os
